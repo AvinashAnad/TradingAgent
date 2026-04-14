@@ -1,0 +1,28 @@
+# Virtual environments and caches
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build and distribution
+build/
+dist/
+*.egg-info/
+
+# Local runtime artifacts
+graphify-out/
+*.db
+*.sqlite3
+
+# VCS and editor metadata
+.git/
+.vscode/
+
+# Binary/data noise
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp

@@ -52,6 +52,30 @@ Run dashboard:
 streamlit run app.py
 ```
 
+## Project Documentation
+
+- Planning and implementation notes: [Thought_process.md](Thought_process.md)
+- Knowledge graph setup and usage: [KNOWLEDGE_GRAPH.md](KNOWLEDGE_GRAPH.md)
+
+## Knowledge Graph (Graphify)
+
+This repo can be mapped into a knowledge graph using graphify.
+
+Quick path:
+
+```bash
+pip install graphifyy
+graphify install --platform codex
+```
+
+Then in your assistant, run:
+
+```text
+/graphify .
+```
+
+Expected outputs are created in `graphify-out/`, including `GRAPH_REPORT.md`, `graph.json`, and `graph.html`.
+
 ## Notes
 
 - `.env` is ignored by git.
