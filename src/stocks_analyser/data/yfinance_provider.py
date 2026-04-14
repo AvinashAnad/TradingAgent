@@ -36,6 +36,11 @@ class YFinanceProvider:
         if df.empty:
             return df
 
+        # Newer yfinance versions can return a MultiIndex like ("Close", "TCS.NS").
+        # For single-symbol fetches we only need the first level OHLCV names.
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = [str(col[0]) for col in df.columns]
+
         df = df.rename(columns={
             "Open": "open",
             "High": "high",
