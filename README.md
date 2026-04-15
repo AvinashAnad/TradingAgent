@@ -17,7 +17,36 @@ Python stock analysis and paper-trading agent for Indian equities.
 
 - v1 indicator history source: yfinance.
 - Production live minute data seam: Dhan adapter module.
-- v1 execution mode: paper trading only (no live order placement).
+- Default execution mode is paper (`APP_MODE=dev`); live order attempts are enabled in `APP_MODE=prod`.
+- Optional LLM audit cross-check: NVIDIA build.nvidia.com compatible API.
+
+## Runtime Modes
+
+The app now supports two runtime modes via `APP_MODE`:
+
+- `dev`: runs statistical strategy, performs a Dhan API-state health check, and executes paper buy/sell simulation.
+- `prod`: runs statistical strategy, logs all actions, and attempts live Dhan market order execution for BUY/SELL.
+
+For `prod` mode, set `DHAN_SYMBOL_SECURITY_MAP` in `.env` so symbols resolve to Dhan security IDs.
+Example:
+
+```dotenv
+DHAN_SYMBOL_SECURITY_MAP={"TCS":"11536","INFY":"1594"}
+```
+
+## Optional LLM Cross-Check (Audit)
+
+Use this only as a second opinion over the statistical decision engine.
+
+1. Add values in `.env`:
+
+	- `LLM_CROSSCHECK_MODE=audit_only`
+	- `NVIDIA_API_KEY=<your_key>`
+	- Optional: `NVIDIA_MODEL`, `NVIDIA_BASE_URL`, `NVIDIA_TIMEOUT_SECONDS`
+
+2. Run a cycle as usual.
+
+In `audit_only` mode, trading actions remain rule-based; LLM outputs are logged for comparison.
 
 ## Setup
 

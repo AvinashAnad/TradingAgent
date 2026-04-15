@@ -42,6 +42,12 @@ class AnalysisResult:
     fundamentals: StockFundamentals
     action: str
     reasons: list[str]
+    llm_action: Optional[str] = None
+    llm_confidence: Optional[float] = None
+    llm_rationale: Optional[str] = None
+    llm_provider: Optional[str] = None
+    llm_model: Optional[str] = None
+    llm_mode: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -60,3 +66,31 @@ class DecisionLog:
     price: float
     score: int
     reasons: list[str]
+    llm_action: Optional[str] = None
+    llm_confidence: Optional[float] = None
+    llm_rationale: Optional[str] = None
+    llm_provider: Optional[str] = None
+    llm_model: Optional[str] = None
+    llm_mode: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class CrossCheckResult:
+    action: str
+    confidence: float
+    rationale: str
+    provider: str
+    model: str
+    mode: str
+
+
+@dataclass(frozen=True)
+class ExecutionLog:
+    symbol: str
+    action: str
+    timestamp: datetime
+    mode: str
+    execution_type: str
+    status: str
+    message: str
+    broker_order_id: Optional[str] = None

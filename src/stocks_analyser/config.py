@@ -26,7 +26,22 @@ class Settings:
     dhan_client_id: str
     dhan_access_token: str
     dhan_base_url: str
+    dhan_health_endpoint: str
+    dhan_order_endpoint: str
+    dhan_exchange_segment: str
+    dhan_product_type: str
+    dhan_order_type: str
+    dhan_validity: str
+    dhan_symbol_security_map: str
+    default_trade_quantity: int
     sqlite_path: str
+    llm_crosscheck_mode: str
+    nvidia_api_key: str
+    nvidia_base_url: str
+    nvidia_model: str
+    nvidia_timeout_seconds: int
+    nvidia_temperature: float
+    nvidia_max_tokens: int
 
     @staticmethod
     def _env_int(name: str, default: int) -> int:
@@ -68,5 +83,23 @@ class Settings:
             dhan_client_id=os.getenv("DHAN_CLIENT_ID", ""),
             dhan_access_token=os.getenv("DHAN_ACCESS_TOKEN", ""),
             dhan_base_url=os.getenv("DHAN_BASE_URL", "https://api.dhan.co"),
+            dhan_health_endpoint=os.getenv("DHAN_HEALTH_ENDPOINT", "/fundlimit"),
+            dhan_order_endpoint=os.getenv("DHAN_ORDER_ENDPOINT", "/orders"),
+            dhan_exchange_segment=os.getenv("DHAN_EXCHANGE_SEGMENT", "NSE_EQ"),
+            dhan_product_type=os.getenv("DHAN_PRODUCT_TYPE", "CNC"),
+            dhan_order_type=os.getenv("DHAN_ORDER_TYPE", "MARKET"),
+            dhan_validity=os.getenv("DHAN_VALIDITY", "DAY"),
+            dhan_symbol_security_map=os.getenv("DHAN_SYMBOL_SECURITY_MAP", "{}"),
+            default_trade_quantity=cls._env_int("DEFAULT_TRADE_QUANTITY", 1),
             sqlite_path=os.getenv("SQLITE_PATH", "stocks_analyser.db"),
+            llm_crosscheck_mode=os.getenv("LLM_CROSSCHECK_MODE", "off"),
+            nvidia_api_key=os.getenv("NVIDIA_API_KEY", ""),
+            nvidia_base_url=os.getenv(
+                "NVIDIA_BASE_URL",
+                "https://integrate.api.nvidia.com/v1/chat/completions",
+            ),
+            nvidia_model=os.getenv("NVIDIA_MODEL", "meta/llama-3.1-70b-instruct"),
+            nvidia_timeout_seconds=cls._env_int("NVIDIA_TIMEOUT_SECONDS", 20),
+            nvidia_temperature=cls._env_float("NVIDIA_TEMPERATURE", 0.1),
+            nvidia_max_tokens=cls._env_int("NVIDIA_MAX_TOKENS", 300),
         )
